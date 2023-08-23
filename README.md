@@ -1,5 +1,5 @@
-# 135863-Muema_Ian
-Supervisor-Mr.Patrick Shabaya
+135863-Muema_Ian
+Supervisor - Mr.Patrick Shabaya
 
 Abstract
 One in four people suffer from mental illnesses at one point in their lives, this is not only in
