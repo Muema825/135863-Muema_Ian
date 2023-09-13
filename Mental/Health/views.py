@@ -3,6 +3,7 @@ from django.contrib.auth.models import User, auth
 from django.contrib import messages
 
 
+
 # Create your views here.
 def home(request):
     return render(request,"home.html")
@@ -12,7 +13,6 @@ def register(request):
         first_name = request.POST['first_name']
         last_name = request.POST['last_name']
         username = request.POST['username']
-        phone_number = request.POST['phone_number']
         email = request.POST['email']
         password = request.POST['password']
         confirm_password = request.POST ['confirm_password']
@@ -20,9 +20,12 @@ def register(request):
             if User.objects.filter(username=username).exists():
                 messages.info(request, 'Username exists')
                 return redirect(register)
+            if User.objects.filter(email=email).exists():
+                messages.info(request, 'Email exists')
+                return redirect(register)
             
             else:
-                user = User.objects.create_user(username=username, password=password, email=email, first_name=first_name, last_name=last_name,phone_number=phone_number)
+                user = User.objects.create_user(username=username, password=password, email=email, first_name=first_name, last_name=last_name)
                 user.set_password(password)
                 user.save()
                 print('success in registration')
@@ -45,8 +48,9 @@ def login_user(request):
             messages.info(request,'Invalid Username or Password')
             return redirect('login_user')
     else:
-         return render(request="login.html")
+         return render(request,"login.html")
     
 def logout_user(request):
     auth.logout(request)
     return redirect('home')
+

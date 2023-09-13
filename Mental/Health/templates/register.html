@@ -16,7 +16,8 @@
   </nav>
     <h1 class="text-center text-success">Mental Health</h1>
     <div class="container-fluid">
-        <form action= "{%url" "register  %}" method= "POST" class="row g-3">
+        <form action="{% url "register" %}" method="POST" class="row g-3">
+
             {% csrf_token%}
             <div class="col-md-6">
               <label for="inputFName" class="form-label">First Name</label>
@@ -24,27 +25,23 @@
             </div>
             <div class="col-md-6">
               <label for="inputLName" class="form-label">Last Name</label>
-              <input name="last_name"type="password" class="form-control" id="inputLName">
+              <input name="last_name"type="text" class="form-control" id="inputLName">
             </div>
             <div class="col-md-6">
                 <label for="inputUName" class="form-label">User Name</label>
                 <input name="username" type="text" class="form-control" id="inputUName">
-              </div>
-              <div class="col-md-6">
-                <label for="inputPNumber" class="form-label">Phone Number</label>
-                <input name="phone_number"type="text" class="form-control" id="inputPNumber">
-              </div>
+            </div>
             <div class="col-md-6">
               <label for="inputEmail4" class="form-label">Email</label>
               <input name="email" type="email" class="form-control" id="inputEmail4" placeholder="">
             </div>
             <div class="col-md-6">
               <label for="inputPassword4" class="form-label">Password</label>
-              <input name="password" type="password " class="form-control" id="inputPassword4" placeholder="">
+              <input name="password" type="password" class="form-control" id="inputPassword4" placeholder="">
             </div>
             <div class="col-md-6">
-                <label for="inputCPassword" class="form-label">Confirm Password</label>
-                <input name="confirm_password" type="password" class="form-control" id="inputCPassword" placeholder="">
+                <label for="inputPassword4" class="form-label">Confirm Password</label>
+                <input name="confirm_password" type="password" class="form-control" id="inputPassword4" placeholder="">
               </div>
             <div class="col-12">
               <button type="submit" class="btn btn-success btn-lg">Register</button>
