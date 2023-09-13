@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+  </head>
+  <body>
+  
+  <!-- As a heading -->
+  <nav class="navbar bg-dark navbar-dark">
+    <div class="container-fluid">
+      <span class="navbar-brand mb-0 h1">Navbar</span>
+    </div>
+  </nav>
+    <h1 class="text-center text-success">Mental Health</h1>
+    {% if request.user.is_authenticated%}
+    <p class="text-success">You are logged in</p>
+    <p class="text-success">Username :{{request.user.username}}</p>
+    {%else%}
+        <p class="text-danger">User is not logged in</p>
+    
+    {% endif %}   
+
+    <div class="container-fluid">
+        <form action="{% url "login_user"%}" method="POST">
+            {% csrf_token%}
+            <div class="row mb-3">
+              <label for="inputEmail3" class="col-sm-2 col-form-label">Username</label>
+              <div class="col-sm-10">
+                <input name="username" type="email" class="form-control" id="">
+              </div>
+            </div>
+            <div class="row mb-3">
+                <label for="inputPNumber" class="col-sm-2 col-form-label">Phone Number</label>
+                <div class="col-sm-10">
+                  <input name="phone_number" type="text" class="form-control" id="inputPNumber">
+                </div>
+              </div>
+            <div class="row mb-3">
+              <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
+              <div class="col-sm-10">
+                <input name="password" type="password" class="form-control" id="inputPassword3">
+              </div>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Sign in</button>
+          </form>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+  </body>
+</html>
