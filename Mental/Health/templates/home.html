@@ -20,11 +20,10 @@
     {% if request.user.is_authenticated%}
     <p class="text-success">You are logged in</p>
     <p class="text-success">Username :{{request.user.username}}</p>
-    <a href={%url "logout_user" %}type="button" class="btn btn-success btn-lg">Sign Out</a>
+    <a href='{% url 'logout_user' %}' type="button" class="btn btn-success btn-lg">Sign Out</a>
     {%else%}
-        <p class="text-danger">User is not logged in</p>
-        <a href={% url "register" %}type="button" class="btn btn-success btn-lg">Register</a>
-        <a href={% url "login_user" %}type="button" class="btn btn-success btn-lg">Sign In</a>
+    <a href='{% url 'register' %}' type="button" class="btn btn-success btn-lg">Register</a>
+    <a href='{% url 'login_user' %}' type="button" class="btn btn-success btn-lg">login</a>
     {% endif %} 
 
     </div>

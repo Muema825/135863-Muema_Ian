@@ -5,6 +5,7 @@ from .utils import send_otp
 from datetime import datetime
 import pyotp
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def home(request):
@@ -32,11 +33,15 @@ def register(request):
                 user.save()
                 print('success in registration')
                 return redirect('login_user')
+        else:
+            messages.info(request,"Passwords are not matching")
+            return redirect(register)
     else:
-        print("This is not POST method")
-        return render(request,"register.html")
+        print("No Post Method")    
+        return render(request,'register.html')
     
 def login_user(request):
+    error_message = None
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
@@ -44,15 +49,19 @@ def login_user(request):
         user = auth.authenticate(username=username, password=password)
 
         if user is not None:
-            send_otp(request)
+            
             request.session['username'] = username
-            auth.login(request,user)
-            return redirect('home')
+            return redirect('otp')
+           # auth.login(request,user)
+           # return redirect('home')
         else:
             messages.info(request,'Invalid Username or Password')
             return redirect('login_user')
     else:
-         return render(request,"login.html")
+         return render(request,'login.html')
+    
+
+
 
 def otp_view(request):
     error_message = None
@@ -77,16 +86,23 @@ def otp_view(request):
 
                     return redirect('home')
                 else:
-                    error_message='invalid one time password'
+                    error_message='Invalid one time password'
 
             else:
-                pass  
+               error_message='Invalid one time has expired' 
 
-    else:
-        pass           
+        else:
+            error_message='Oops something went wrong:('          
 
-    return render(request, 'otp.html', {})    
-    
+    return render(request, 'otp.html', {'error_message':error_message})    
+
+@login_required
+def home(request):
+    return render(request, 'home.html', {})
+
+
+
+
 def logout_user(request):
     auth.logout(request)
     return redirect('home')
