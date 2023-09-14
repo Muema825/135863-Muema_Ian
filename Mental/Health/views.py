@@ -1,8 +1,10 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth.models import User, auth
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.models import User,auth
 from django.contrib import messages
-
-
+from .utils import send_otp
+from datetime import datetime
+import pyotp
+from django.contrib.auth.models import User
 
 # Create your views here.
 def home(request):
@@ -42,6 +44,8 @@ def login_user(request):
         user = auth.authenticate(username=username, password=password)
 
         if user is not None:
+            send_otp(request)
+            request.session['username'] = username
             auth.login(request,user)
             return redirect('home')
         else:
@@ -49,6 +53,39 @@ def login_user(request):
             return redirect('login_user')
     else:
          return render(request,"login.html")
+
+def otp_view(request):
+    error_message = None
+    if request.method == 'POST':
+        otp = request.POST['otp']
+        username = request.session['username']
+
+        otp_secret_key = request.session['otp_secret_key']
+        otp_valid_until = request.session['otp_valid_date']
+
+        if otp_secret_key and otp_valid_until is not None:
+            valid_until = datetime.fromisoformat(otp_valid_until)
+
+            if valid_until > datetime.now():
+                totp = pyotp.TOTP(otp_secret_key, interval=60)
+                if totp.verify(otp):
+                    user= get_object_or_404(User, username=username)
+                    login_user(request,user)
+
+                    del request.session['otp_secret_key']
+                    del request.session['otp_valid_date']
+
+                    return redirect('home')
+                else:
+                    error_message='invalid one time password'
+
+            else:
+                pass  
+
+    else:
+        pass           
+
+    return render(request, 'otp.html', {})    
     
 def logout_user(request):
     auth.logout(request)
