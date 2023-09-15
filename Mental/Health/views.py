@@ -19,6 +19,7 @@ def register(request):
         email = request.POST['email']
         password = request.POST['password']
         confirm_password = request.POST ['confirm_password']
+       
         if password==confirm_password:
             if User.objects.filter(username=username).exists():
                 messages.info(request, 'Username exists')
@@ -28,13 +29,13 @@ def register(request):
                 return redirect(register)
             
             else:
-                user = User.objects.create_user(username=username, password=password, email=email, first_name=first_name, last_name=last_name)
+                user = User.objects.create_user(username=username, password=password, email=email, first_name=first_name, last_name=last_name,)
                 user.set_password(password)
                 user.save()
                 print('success in registration')
                 return redirect('login_user')
         else:
-            messages.info(request,"Passwords are not matching")
+            messages.info(request,"Passwords are not the same ")
             return redirect(register)
     else:
         print("No Post Method")    
@@ -94,7 +95,15 @@ def otp_view(request):
         else:
             error_message='Oops something went wrong:('          
 
-    return render(request, 'otp.html', {'error_message':error_message})    
+    return render(request, 'otp.html', {'error_message':error_message}) 
+from django.shortcuts import render
+
+def send_otp_view(request):
+    send_otp(request)
+    return render(request, 'send_otp.html')
+
+
+ 
 
 @login_required
 def home(request):

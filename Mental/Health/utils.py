@@ -1,5 +1,6 @@
 import pyotp
 from datetime import datetime, timedelta
+from django.core.mail import send_mail
 
 
 def send_otp(request):
@@ -8,3 +9,5 @@ def send_otp(request):
     request.session['otp_secret_key']= totp.secret
     valid_date = datetime.now() + timedelta(minutes=1)
     request.session['otp_valid_date'] =  str(valid_date)
+
+    print(f"Your one time password is {otp}")
