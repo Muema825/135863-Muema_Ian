@@ -1,7 +1,8 @@
 {
-    "python.analysis.typeCheckingMode": "off",
     "cSpell.words": [
-        "pyotp",
-        "totp"
+        "myuser",
+        "signin",
+        "signout",
+        "uidb"
     ]
 }
