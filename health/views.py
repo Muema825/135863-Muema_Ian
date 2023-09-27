@@ -44,7 +44,7 @@ def signup(request):
         myuser = User.objects.create_user(username,email,password)
         myuser.first_name = firstName
         myuser.last_name = lastName
-        myuser.phone_number = phoneNumber
+        myuser.phoneNumber = phoneNumber
         myuser.is_active = False
         myuser.save()
 
