@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login_Page</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Login Form</title>
+  <link rel="stylesheet" href="../static/css/loginstyle.css">
 </head>
 <body>
     {% for message in messages%}
@@ -15,17 +17,32 @@
 
     </div>
     {% endfor %}
-    <h3>Login</h3>
-    <form action="/signin" method="POST">
-        {% csrf_token %}
-        <label for="">Username</label>
-        <input type="text" id="username" name="username" required>
-        <br>
-        <label for="">Password</label>
-        <input type="password" id="password" name="password" required>
-        <br>
-        <button type="submit">Login</button>
-    </form>
+    <div class="container">
+        <input type="checkbox" id="check">
+        <div class="login form">
+          <header>Login</header>
+          <form action="/signin" method="post">
+            {% csrf_token %}
+            <input type="text" id="username"  name="username" placeholder="Enter your username">
+            <input type="password" id="password" name="password"  placeholder="Enter your password">
+            <a href="#">Forgot password?</a>
+            <input type="submit" class="button" value="Login">
+          </form>
+          <div class="signup">
+            <span class="signup">Don't have an account?
+                <a href="/signup">Signup</a>
+            </span>
+          </div>
+        </div>
+        
+      </div>
+    </body>
+    </html>
     
-</body>
-</html>
+    
+        
+        
+    
+
+
+  

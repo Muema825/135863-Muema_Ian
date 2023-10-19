@@ -1,11 +1,16 @@
 <!DOCTYPE html>
+<!-- Website - www.codingnepalweb.com -->
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration Page</title>
-</head>
-<body>
+    <title>Form Validation in HTML | CodingNepal</title>
+    <link rel="stylesheet" href="../../static/css/styles.css">
+    <!-- Fontawesome CDN Link For Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+  </head>
+  <body>
+
     {% for message in messages%}
     <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
         <strong>Message:</strong>{{message}}
@@ -18,29 +23,60 @@
     <h3>Register</h3>
     <form action="/signup" method="POST">
         {% csrf_token %}
-        <label for="">First_Name</label>
-        <input type="text" id="firstName" name="firstName" required>
-        <br>
-        <label for="">Last_Name</label>
-        <input type="text" id="lastName" name="lastName" required>
-        <br>
-        <label for="">Phone Number</label>
-        <input type="text" id="phoneNumber" name="phoneNumber" required>
-        <br>
-        <label for="">Username</label>
-        <input type="text" id="username" name="username" required>
-        <br>
-        <label for="">Email</label>
-        <input type="email" id="email" name="email" required>
-        <br>
-        <label for="">Password</label>
-        <input type="password" id="password" name="password" required>
-        <br>
-        <label for="">Confirm Password</label>
-        <input type="password" id="confirmPassword" name="confirmPassword" required>
-        <br>
-        <button type="submit">Register</button>
+        <div class="form-group firstName">
+            <label for="firstName">First Name</label>
+            <input type="text" id="firstName" placeholder="Enter your First Name">
+        </div>
+
+        <div class="form-group lastName">
+            <label for="lastName">Last Name</label>
+            <input type="text" id="lastName" placeholder="Enter your Last Name">
+        </div>
+
+        <div class="form-group username">
+            <label for="username">Username</label>
+            <input type="text" id="username" placeholder="Enter your username" required>
+          </div>
+
+        <div class="form-group email">
+            <label for="email">Email Address</label>
+            <input type="text" id="email" placeholder="Enter your email address" required>
+          </div>
+
+        <div class="form-group password">
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="Enter your password">
+            <i id="pass-toggle-btn" class="fa-solid fa-eye"></i>
+          </div>  
+
+        <div class="form-group password">
+            <label for="password">Confirm Password</label>
+            <input type="password" id="confirmPassword" placeholder="Confirm your password">
+            <i id="pass-toggle-btn" class="fa-solid fa-eye"></i>
+          </div> 
+        
+        <div class="form-group date">
+            <label for="date">Birth Date</label>
+            <input type="date" id="date" placeholder="Select your date">
+          </div>
+
+        <div class="form-group gender">
+            <label for="gender">Gender</label>
+            <select id="gender">
+              <option value="" selected disabled>Select your gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </select>
+          </div> 
+
+        <div class="form-group submit-btn">
+            <button type="submit">Register</button>
+        </div>
+            
     </form>
-   
+
+<script src="../../static/js/scripts.js"></script>
 </body>
 </html>
+    

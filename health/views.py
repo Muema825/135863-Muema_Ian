@@ -15,12 +15,23 @@ from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 def home(request):
     return render(request, "health/index.html")
 
+def about(request):
+    return render(request, "health/about.html") 
+ 
+def contact(request):
+    return render(request, "health/contact.html")
+    
+def departments(request):
+    return render(request, "health/departments.html")
+
+def doctors(request):
+    return render(request, "health/doctors.html")
+
 def signup(request):
     
     if request.method == "POST":
         firstName = request.POST['firstName']
         lastName = request.POST['lastName']
-        phoneNumber = request.POST['phoneNumber']
         username = request.POST['username']
         email = request.POST['email']
         password = request.POST['password']
@@ -44,7 +55,6 @@ def signup(request):
         myuser = User.objects.create_user(username,email,password)
         myuser.first_name = firstName
         myuser.last_name = lastName
-        myuser.phoneNumber = phoneNumber
         myuser.is_active = False
         myuser.save()
 
@@ -119,4 +129,6 @@ def activate(request, uidb64, token):
             return redirect('home')
         else:
             return render(request,'activation_failed.html')
+        
+
 
