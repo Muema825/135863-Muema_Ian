@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'health'
+    'health',
+    
     
 ]
 
@@ -124,6 +125,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+AUTH_USER_MODEL= 'health.CustomUser'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -145,7 +147,7 @@ JAZZMIN_SETTINGS = {
     "site_brand": "Mental Health Care Clinic",
 
     # Logo to use for your site, must be present in static files, used for brand on top left
-    "site_logo": "books/img/logo.png",
+    "site_logo": "",
 
     # Logo to use for your site, must be present in static files, used for login form logo (defaults to site_logo)
     "login_logo": None,
@@ -163,7 +165,7 @@ JAZZMIN_SETTINGS = {
     "welcome_sign": "Welcome to the Mental Health Care Clinic",
 
     # Copyright on the footer
-    "copyright": "Acme Library Ltd",
+    "copyright": "Mental Health Ltd",
 
     # List of model admins to search from the search bar, search bar omitted if excluded
     # If you want to use a single search field you dont need to use a list, you can use a simple string 

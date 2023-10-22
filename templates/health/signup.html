@@ -1,16 +1,14 @@
 <!DOCTYPE html>
-<!-- Website - www.codingnepalweb.com -->
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Form Validation in HTML | CodingNepal</title>
-    <link rel="stylesheet" href="../../static/css/styles.css">
-    <!-- Fontawesome CDN Link For Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Registration Form </title>
+   
+    <link rel="stylesheet" href="../static/css/registerstyle.css" />
   </head>
   <body>
-
     {% for message in messages%}
     <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
         <strong>Message:</strong>{{message}}
@@ -20,63 +18,67 @@
 
     </div>
     {% endfor %}
-    <h3>Register</h3>
-    <form action="/signup" method="POST">
+    <section class="container">
+      <header>Registration Form</header>
+      <form action="/signup" method="post" class="form">
         {% csrf_token %}
-        <div class="form-group firstName">
-            <label for="firstName">First Name</label>
-            <input type="text" id="firstName" placeholder="Enter your First Name">
+        <div class="input-box">
+          <label>First Name</label>
+          <input type="text" name="firstName" placeholder="Enter first name" required />
         </div>
 
-        <div class="form-group lastName">
-            <label for="lastName">Last Name</label>
-            <input type="text" id="lastName" placeholder="Enter your Last Name">
+        <div class="input-box">
+          <label>Last Name</label>
+          <input type="text" name="lastName" placeholder="Enter last name" required />
         </div>
 
-        <div class="form-group username">
-            <label for="username">Username</label>
-            <input type="text" id="username" placeholder="Enter your username" required>
-          </div>
-
-        <div class="form-group email">
-            <label for="email">Email Address</label>
-            <input type="text" id="email" placeholder="Enter your email address" required>
-          </div>
-
-        <div class="form-group password">
-            <label for="password">Password</label>
-            <input type="password" id="password" placeholder="Enter your password">
-            <i id="pass-toggle-btn" class="fa-solid fa-eye"></i>
-          </div>  
-
-        <div class="form-group password">
-            <label for="password">Confirm Password</label>
-            <input type="password" id="confirmPassword" placeholder="Confirm your password">
-            <i id="pass-toggle-btn" class="fa-solid fa-eye"></i>
-          </div> 
-        
-        <div class="form-group date">
-            <label for="date">Birth Date</label>
-            <input type="date" id="date" placeholder="Select your date">
-          </div>
-
-        <div class="form-group gender">
-            <label for="gender">Gender</label>
-            <select id="gender">
-              <option value="" selected disabled>Select your gender</option>
-              <option value="Male">Male</option>
-              <option value="Female">Female</option>
-              <option value="Other">Other</option>
-            </select>
-          </div> 
-
-        <div class="form-group submit-btn">
-            <button type="submit">Register</button>
+        <div class="input-box">
+          <label>Username</label>
+          <input type="text" name="username" placeholder="Enter username" required />
         </div>
-            
-    </form>
 
-<script src="../../static/js/scripts.js"></script>
-</body>
+        <div class="input-box">
+          <label>Email Address</label>
+          <input type="text" name="email" placeholder="Enter email address" required />
+        </div>
+
+        <div class="column">
+          <div class="input-box">
+            <label>Phone Number</label>
+            <input type="number" name="phoneNumber" placeholder="Enter phone number" required />
+          </div>
+          <div class="input-box">
+            <label>Birth Date</label>
+            <input type="date" name="age" placeholder="Enter birth date" required />
+          </div>
+        </div>
+        <div class="gender-box">
+          <h3>Gender</h3>
+          <div class="gender-option">
+            <div class="gender">
+              <input type="radio" id="check-male" name="gender" checked />
+              <label for="check-male">male</label>
+            </div>
+            <div class="gender">
+              <input type="radio" id="check-female" name="gender" />
+              <label for="check-female">Female</label>
+            </div>
+            <div class="gender">
+              <input type="radio" id="check-other" name="gender" />
+              <label for="check-other">prefer not to say</label>
+            </div>
+          </div>
+        </div>
+        <div class="input-box">
+          <label>Password</label>
+          <input type="password" name="password" placeholder="Enter your password" required />
+        </div>
+        <div class="input-box">
+          <label>Confirm Password</label>
+          <input type="password" name="confirmPassword" placeholder="Confirm your password" required />
+        </div>
+        <button type="submit">Submit</button>
+      </form>
+    </section>
+  </body>
 </html>
-    

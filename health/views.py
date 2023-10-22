@@ -36,6 +36,8 @@ def signup(request):
         email = request.POST['email']
         password = request.POST['password']
         confirmPassword = request.POST['confirmPassword']
+        phoneNumber = request.POST['phoneNumber']
+        gender = request.POST['gender']
 
         if User.objects.filter(username=username):
             messages.error(request,"Username already exists")
@@ -58,7 +60,7 @@ def signup(request):
         myuser.is_active = False
         myuser.save()
 
-        messages.success(request, "Your Account Has Been Created Successfully\n A confirmation message has been sent to your email, please confirm your email in order to activate your account")
+        messages.success(request, "Your Account Has Been Created Successfully \n A confirmation message has been sent to your email, please confirm your email in order to activate your account")
 
         #Welcome Email Message
 
@@ -102,18 +104,18 @@ def signin(request):
 
         if user is not None:
             login(request, user)
-            firstName = user.first_name
+            firstName = user.firstName
             return render(request, "health/index.html",{'firstName': firstName})
         else:
             messages.error(request, "Wrong Credentials")
-            return redirect("home") 
+            return redirect("signin") 
     
     return render(request, "health/signin.html")
 
 def signout(request):
     logout(request)
     messages.success(request,"logged out successfully")
-    return redirect('home')
+    return redirect('signin')
 
 def activate(request, uidb64, token):
         try:
