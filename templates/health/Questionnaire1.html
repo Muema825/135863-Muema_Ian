@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anxiety and Depression Questionnaire</title>
+  <script src="../../static/js/Trial.js"></script>
+  <link rel="stylesheet" type="text/css" href="../../static/css/Trial.css">
+  
+</head>
+<body>
+
+  <h1>Anxiety and Depression Questionnaire</h1>
+
+  <form action="/submit" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="form_token" value="YOUR_FORM_TOKEN">
+
+    <fieldset id="page-2">
+      <legend>Page 2</legend>
+
+      
+        <label>
+            Q11: I found myself getting upset rather easily.
+        </label>
+
+        <select id="Q11A" name="Q11A" required>
+          <option value="0">Did not apply to me at all</option>
+          <option value="1">Applied to me to some degree, or some of the time</option>
+          <option value="2">Applied to me to a considerable degree, or a good part of the time</option>
+          <option value="3">Applied to me very much, or most of the time</option>
+        </select>
+
+        <label>
+            Q12: I felt that I was using a lot of nervous energy.
+        </label>
+
+        <select id="Q12A" name="Q12A" required>
+            <option value="0">Did not apply to me at all</option>
+            <option value="1">Applied to me to some degree, or some of the time</option>
+            <option value="2">Applied to me to a considerable degree, or a good part of the time</option>
+            <option value="3">Applied to me very much, or most of the time</option>
+          </select>
+
+        <label>
+            Q13: I felt sad and depressed.
+        </label>
+        <select id="Q13A" name="Q13A" required>
+            <option value="0">Did not apply to me at all</option>
+            <option value="1">Applied to me to some degree, or some of the time</option>
+            <option value="2">Applied to me to a considerable degree, or a good part of the time</option>
+            <option value="3">Applied to me very much, or most of the time</option>
+        </select>
+        
+        <label>
+            Q14: I found myself getting impatient when I was delayed in any way (eg, elevators, traffic lights, being kept waiting).
+        </label>  
+          <select id="Q14A" name="Q14A" required>
+            <option value="0">Did not apply to me at all</option>
+            <option value="1">Applied to me to some degree, or some of the time</option>
+            <option value="2">Applied to me to a considerable degree, or a good part of the time</option>
+            <option value="3">Applied to me very much, or most of the time</option>
+          </select>
+        
+        <label>
+            Q15: I had a feeling of faintness.
+        </label>  
+          <select id="Q15A" name="Q15A" required>
+            <option value="0">Did not apply to me at all</option>
+            <option value="1">Applied to me to some degree, or some of the time</option>
+            <option value="2">Applied to me to a considerable degree, or a good part of the time</option>
+            <option value="3">Applied to me very much, or most of the time</option>
+          </select>
+        
+        <label>
+            Q16: I felt that I had lost interest in just about everything.
+        </label>
+          <select id="Q16A" name="Q16A" required>
+            <option value="0">Did not apply to me at all</option>
+            <option value="1">Applied to me to some degree, or some of the time</option>
+            <option value="2">Applied to me to a considerable degree, or a good part of the time</option>
+            <option value="3">Applied to me very much, or most of the time</option>
+          </select>
+        
+        <label>
+            Q17: I felt I wasn't worth much as a person.
+        </label>
+          <select id="Q17A" name="Q17A" required>
+            <option value="0">Did not apply to me at all</option>
+            <option value="1">Applied to me to some degree, or some of the time</option>
+            <option value="2">Applied to me to a considerable degree, or a good part of the time</option>
+            <option value="3">Applied to me very much, or most of the time</option>
+          </select>
+        
+        <label>
+            q18: I felt that I was rather touchy.
+        </label>
+          <select id="Q18A" name="Q18A" required>
+            <option value="0">Did not apply to me at all</option>
+            <option value="1">Applied to me to some degree, or some of the time</option>
+            <option value="2">Applied to me to a considerable degree, or a good part of the time</option>
+            <option value="3">Applied to me very much, or most of the time</option>
+          </select>
+        
+        <label>
+            Q19: I perspired noticeably (eg, hands sweaty) in the absence of high temperatures or physical exertion.
+        </label>  
+          <select id="Q19A" name="Q19A" required>
+            <option value="0">Did not apply to me at all</option>
+            <option value="1">Applied to me to some degree, or some of the time</option>
+            <option value="2">Applied to me to a considerable degree, or a good part of the time</option>
+            <option value="3">Applied to me very much, or most of the time</option>
+          </select>
+        
+        <label>
+            Q20: I felt scared without any good reason.
+        </label>
+          <select id="Q20A" name="Q20A" required>
+            <option value="0">Did not apply to me at all</option>
+            <option value="1">Applied to me to some degree, or some of the time</option>
+            <option value="2">Applied to me to a considerable degree, or a good part of the time</option>
+            <option value="3">Applied to me very much, or most of the time</option>
+          </select>
+      
+    </fieldset>
+
+    <div class="previous-next-buttons">
+        <div class="previous-next-buttons">
+            <a href="{% url 'Questionnaire' %}" class="previous-button">
+                <button type="button" class="next-button" >Previous</button>
+            </a>
+            <a href="{% url 'Questionnaire2'%}" class="next-button">
+                <button type="button" class="next-button" >Next</button>
+            </a>
+           
+    </div>
+
+    <input type="hidden" name="current_page" value="1">
+  </form>
+
+  
+
+</body>
+</html>

@@ -11,6 +11,10 @@ from django.utils.http import urlsafe_base64_encode
 from django.utils.encoding import force_bytes, force_str
 from .tokens import generate_token
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
+from django.urls import reverse
+
+
+
 # Create your views here.
 def home(request):
     return render(request, "health/index.html")
@@ -26,6 +30,25 @@ def departments(request):
 
 def doctors(request):
     return render(request, "health/doctors.html")
+
+def Questionnaire(request):
+    return render(request, "health/Questionnaire.html")
+
+def Questionnaire1(request):
+    return render(request, "health/Questionnaire1.html")
+
+def Questionnaire2(request):
+    return render(request, "health/Questionnaire2.html")
+
+def Questionnaire3(request):
+    return render(request, "health/Questionnaire3.html")  
+
+def Questionnaire4(request):
+    return render(request, "health/Questionnaire4.html")
+
+
+   
+
 
 def signup(request):
     
@@ -104,7 +127,7 @@ def signin(request):
 
         if user is not None:
             login(request, user)
-            firstName = user.firstName
+            firstName = user.first_name
             return render(request, "health/index.html",{'firstName': firstName})
         else:
             messages.error(request, "Wrong Credentials")
@@ -132,5 +155,11 @@ def activate(request, uidb64, token):
         else:
             return render(request,'activation_failed.html')
         
+def predict(request):
+    return redirect(request,'health/Questionnaire.html')
+
+
+def result(request):
+    return render(request,'health/request.html')
 
 

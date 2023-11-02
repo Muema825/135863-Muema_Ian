@@ -1,0 +1,49 @@
+
+    body {
+      font-family: sans-serif;
+    }
+
+    form {
+      margin: 0 auto;
+      width: 50%;
+      border: 1px solid #ccc;
+      padding: 10px;
+    }
+
+    fieldset {
+      padding: 10px;
+    }
+
+    legend {
+      font-weight: bold;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 5px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      background-color: #000;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .previous-next-buttons {
+      text-align: center;
+    }
+
+    .previous-button,
+    .next-button {
+      margin: 10px;
+    }
+  
