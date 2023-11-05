@@ -12,41 +12,98 @@ from django.utils.encoding import force_bytes, force_str
 from .tokens import generate_token
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.urls import reverse
+import pandas as pd
+from django.http import JsonResponse
+
 
 
 
 # Create your views here.
+# render index page
 def home(request):
     return render(request, "health/index.html")
 
+# render about us page
 def about(request):
     return render(request, "health/about.html") 
- 
+
+ # render contacts page
 def contact(request):
     return render(request, "health/contact.html")
-    
+
+# render departments page
 def departments(request):
     return render(request, "health/departments.html")
-
+# render doctors page
 def doctors(request):
     return render(request, "health/doctors.html")
 
 def Questionnaire(request):
+
+    if request.POST.get('action') == 'post':
+
+        Q1A = int(request. POST.get('Q1A'))
+        Q2A = int (request.POST.get ('Q2A'))
+        Q3A = int (request.POST.get ('Q3A'))
+        Q4A = int (request.POST.get ('Q4A'))
+        Q5A = int (request.POST.get ('Q5A'))
+        Q6A = int (request.POST.get ('Q6A'))
+        Q7A = int (request.POST.get ('Q7A'))
+        Q8A= int (request.POST.get ('Q8A'))
+        Q9A= int (request.POST.get ('Q9A'))
+        Q10A= int (request.POST.get ('Q10A'))
+        Q11A= int (request.POST.get ('Q11A'))
+        Q12A= int (request.POST.get ('Q12A'))
+        Q13A= int (request.POST.get ('Q13A'))
+        Q14A= int (request.POST.get ('Q14A'))
+        Q15A= int (request.POST.get ('Q15A'))
+        Q16A= int (request.POST.get ('Q16A'))
+        Q17A= int (request.POST.get ('Q17A'))
+        Q18A= int (request.POST.get ('Q18A'))
+        Q19A= int (request.POST.get ('Q19A'))
+        Q20A= int (request.POST.get ('Q20A'))
+        Q21A= int (request.POST.get ('Q21A'))
+        Q22A= int (request.POST.get ('Q22A'))
+        Q23A= int (request.POST.get ('Q23A'))
+        Q24A= int (request.POST.get ('Q24A'))
+        Q25A= int (request.POST.get ('Q25A'))
+        Q26A= int (request.POST.get ('Q26A'))
+        Q27A= int (request.POST.get ('Q27A'))
+        Q28A= int (request.POST.get ('Q28A'))
+        Q29A= int (request.POST.get ('Q29A'))
+        Q30A= int (request.POST.get ('Q30A'))
+        Q31A= int (request.POST.get ('Q31A'))
+        Q32A= int (request.POST.get ('Q32A'))
+        Q33A= int (request.POST.get ('Q33A'))
+        Q34A= int (request.POST.get ('Q34A'))
+        Q35A= int (request.POST.get ('Q35A'))
+        Q36A= int (request.POST.get ('Q36A'))
+        Q37A= int (request.POST.get ('Q37A'))
+        Q38A= int (request.POST.get ('Q38A'))
+        Q39A= int (request.POST.get ('Q39A'))
+        Q40A= int (request.POST.get ('Q40A'))
+        Q41A= int (request.POST.get ('Q41A'))
+        Q42A= int (request.POST.get ('Q42A'))
+
+        #Calculate the total score and display it on the page
+        score = 0
+
+        for i in range(1, 42):
+            question_name = 'Q' + str(i) + 'A'
+            answer = int(request.POST.get(question_name))
+            score += answer
+            
+            model = pd.read_pickle("C:\\Users\\muema\\svm_model.pkl")
+
+            result = model.predict([[score]])
+
+            classification = result[0]
+
+            return JsonResponse({'result': classification})
+
+            PredResults.objects.create(classification=classification)
+
     return render(request, "health/Questionnaire.html")
-
-def Questionnaire1(request):
-    return render(request, "health/Questionnaire1.html")
-
-def Questionnaire2(request):
-    return render(request, "health/Questionnaire2.html")
-
-def Questionnaire3(request):
-    return render(request, "health/Questionnaire3.html")  
-
-def Questionnaire4(request):
-    return render(request, "health/Questionnaire4.html")
-
-
    
 
 

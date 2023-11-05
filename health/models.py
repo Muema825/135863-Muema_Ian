@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import  User, AbstractBaseUser, BaseUserManager , PermissionsMixin
 
-
+'''
 class Account(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     birthday = models.DateField() 
@@ -13,12 +13,13 @@ class Account(models.Model):
 
     def __str__(self):
         return self.user.username
-
+'''
     
 
 class MentalHealthAssessment(models.Model):
     DateOfAssessment = models.DateField()
     Scores = models.IntegerField()
+    Diagnosis = models.CharField(max_length=150)
     Username = models.CharField(max_length=150)
     Gender = models.CharField(max_length=10)
 
@@ -36,9 +37,7 @@ class MentalHealthDiagnosis(models.Model):
     def __str__(self):
         return self.Username
 
-class DepressionQuestionnaire(models.Model):
-    for i in range(1, 43):
-        vars()['q' + str(i) + 'a'] = models.IntegerField()
+
 
 
 

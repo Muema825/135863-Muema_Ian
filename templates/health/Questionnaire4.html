@@ -12,9 +12,9 @@
 
   <h1>Anxiety and Depression Questionnaire</h1>
 
-  <form action="/submit" method="post">
+  <form action="" method="POST">
     {% csrf_token %}
-    <input type="hidden" name="form_token" value="YOUR_FORM_TOKEN">
+    
 
     <fieldset id="page-5">
       <legend>Page 5</legend>
@@ -56,7 +56,7 @@
 
     <button type="submit" class="next-button" >Submit</button>
 
-    <input type="hidden" name="current_page" value="1">
+    <input type="hidden" name="current_page" value="4">
   </form>
 
   

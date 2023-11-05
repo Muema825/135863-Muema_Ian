@@ -12,11 +12,6 @@ urlpatterns = [
    path('departments', views.departments, name="departments"),
    path('doctors', views.doctors, name="doctors"),
    path('Questionnaire', views.Questionnaire, name="Questionnaire"),
-   path('Questionnaire1', views.Questionnaire1, name="Questionnaire1"),
-   path('Questionnaire2', views.Questionnaire2, name="Questionnaire2"),
-   path('Questionnaire2', views.Questionnaire2, name="Questionnaire2"),
-   path('Questionnaire3', views.Questionnaire3, name="Questionnaire3"),
-   path('Questionnaire4', views.Questionnaire4, name="Questionnaire4"),
    path('activate/<uidb64>/<token>', views.activate, name="activate"),
  
 
