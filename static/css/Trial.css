@@ -1,49 +1,52 @@
+body {
+  background-color: #006400;
+  font-family: sans-serif;
+}
 
-    body {
-      font-family: sans-serif;
-    }
+form {
+  width: 100px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  background-color: white;
+  border-radius: 1;
+}
 
-    form {
-      margin: 0 auto;
-      width: 50%;
-      border: 1px solid #ccc;
-      padding: 10px;
-    }
+.form-group {
+  margin-bottom: 10px;
+}
 
-    fieldset {
-      padding: 10px;
-    }
+.form-label {
+  display: block;
+  margin-bottom: 5px;
+}
 
-    legend {
-      font-weight: bold;
-    }
+.form-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
 
-    label {
-      display: block;
-      margin-bottom: 5px;
-    }
+.form-radio {
+  display: block;
+  margin-bottom: 10px;
+}
 
-    input,
-    select {
-      width: 100%;
-      padding: 5px;
-      border: 1px solid #ccc;
-    }
+.form-radio input {
+  margin-right: 10px;
+}
 
-    button {
-      background-color: #000;
-      color: #fff;
-      padding: 10px 20px;
-      border: none;
-      cursor: pointer;
-    }
+.form-gender {
+  width: 100px;
+}
 
-    .previous-next-buttons {
-      text-align: center;
-    }
-
-    .previous-button,
-    .next-button {
-      margin: 10px;
-    }
-  
+.form-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #3CB403;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}

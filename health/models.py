@@ -1,38 +1,22 @@
 from django.db import models
-from django.contrib.auth.models import  User, AbstractBaseUser, BaseUserManager , PermissionsMixin
+from django.contrib.auth.models import  User, AbstractBaseUser, BaseUserManager , PermissionsMixin , AbstractUser
 
-'''
-class Account(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    birthday = models.DateField() 
-    gender = models.CharField(
-        max_length=6,
-        choices=[('MALE','MALE'),('FEMALE','FEMALE')]
-    )
-    phoneNumber = models.CharField(max_length=11)
 
-    def __str__(self):
-        return self.user.username
-'''
-    
+
+GENDER_CHOICES = [
+    ('male', 'Male'),
+    ('female', 'Female'),
+    # You can add more options here 
+    ]
+
 
 class MentalHealthAssessment(models.Model):
-    DateOfAssessment = models.DateField()
-    Scores = models.IntegerField()
-    Diagnosis = models.CharField(max_length=150)
+
     Username = models.CharField(max_length=150)
-    Gender = models.CharField(max_length=10)
-
-    def __str__(self):
-        return self.Username
-
-class MentalHealthDiagnosis(models.Model):
+    gender = models.CharField(max_length=6, choices= GENDER_CHOICES, default='', blank=True)
+   # Verdict = models.CharField(max_length=150)
+   
     
-    Username = models.CharField(max_length=150)
-    Gender = models.CharField(max_length=10)
-    Diagnosis = models.CharField(max_length=150)
-    Severity = models.IntegerField()
-    Scores = models.IntegerField()
 
     def __str__(self):
         return self.Username

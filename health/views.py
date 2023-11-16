@@ -1,3 +1,4 @@
+from bs4 import BeautifulSoup
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from django.contrib.auth.models import User
@@ -14,8 +15,21 @@ from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.urls import reverse
 import pandas as pd
 from django.http import JsonResponse
-
-
+import re
+from django.contrib.auth.decorators import login_required
+import keras
+from keras.models import load_model  
+import tensorflow as tf
+from keras.preprocessing.sequence import pad_sequences
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.ensemble import VotingClassifier
+from nltk.corpus import stopwords
+from nltk.stem import PorterStemmer
+ps = PorterStemmer()
+from sklearn.ensemble import VotingClassifier
+import joblib
+import pickle
+import json
 
 
 # Create your views here.
@@ -37,75 +51,44 @@ def departments(request):
 # render doctors page
 def doctors(request):
     return render(request, "health/doctors.html")
+# Load the stop words
+stop_words = set(stopwords.words('english'))
+
+# Load the PorterStemmer
+ps = PorterStemmer()
+
+# Load the TF-IDF vectorizer
+vectorizer = TfidfVectorizer()
+
+# Load the VotingClassifier
+VotingClassifiers = joblib.load('C:/Users/muema/Suicide_model.pkl')
+
+    
+# Your preprocessing functions
+def preprocess(inp):
+  inp = inp.lower()  # convert to lower case
+  inp = inp.replace(r'[^\w\s]+', '')  # remove punctuations
+  inp = [word for word in inp.split() if word not in (stop_words)]  # tokenize the sentence
+  inp = ' '.join([ps.stem(i) for i in inp])  # stemming
+  inputToModel = vectorizer.transform([inp]).toarray()  # transform to vector form
+  return inputToModel
+ 
+
 
 def Questionnaire(request):
 
-    if request.POST.get('action') == 'post':
+    if request.method == 'POST':
+        
+        user_input = request.POST['user_input']
+        processed_array = preprocess(user_input)
+        predict = VotingClassifiers.predict(processed_array)
+        
+        feedback = predict[0]
 
-        Q1A = int(request. POST.get('Q1A'))
-        Q2A = int (request.POST.get ('Q2A'))
-        Q3A = int (request.POST.get ('Q3A'))
-        Q4A = int (request.POST.get ('Q4A'))
-        Q5A = int (request.POST.get ('Q5A'))
-        Q6A = int (request.POST.get ('Q6A'))
-        Q7A = int (request.POST.get ('Q7A'))
-        Q8A= int (request.POST.get ('Q8A'))
-        Q9A= int (request.POST.get ('Q9A'))
-        Q10A= int (request.POST.get ('Q10A'))
-        Q11A= int (request.POST.get ('Q11A'))
-        Q12A= int (request.POST.get ('Q12A'))
-        Q13A= int (request.POST.get ('Q13A'))
-        Q14A= int (request.POST.get ('Q14A'))
-        Q15A= int (request.POST.get ('Q15A'))
-        Q16A= int (request.POST.get ('Q16A'))
-        Q17A= int (request.POST.get ('Q17A'))
-        Q18A= int (request.POST.get ('Q18A'))
-        Q19A= int (request.POST.get ('Q19A'))
-        Q20A= int (request.POST.get ('Q20A'))
-        Q21A= int (request.POST.get ('Q21A'))
-        Q22A= int (request.POST.get ('Q22A'))
-        Q23A= int (request.POST.get ('Q23A'))
-        Q24A= int (request.POST.get ('Q24A'))
-        Q25A= int (request.POST.get ('Q25A'))
-        Q26A= int (request.POST.get ('Q26A'))
-        Q27A= int (request.POST.get ('Q27A'))
-        Q28A= int (request.POST.get ('Q28A'))
-        Q29A= int (request.POST.get ('Q29A'))
-        Q30A= int (request.POST.get ('Q30A'))
-        Q31A= int (request.POST.get ('Q31A'))
-        Q32A= int (request.POST.get ('Q32A'))
-        Q33A= int (request.POST.get ('Q33A'))
-        Q34A= int (request.POST.get ('Q34A'))
-        Q35A= int (request.POST.get ('Q35A'))
-        Q36A= int (request.POST.get ('Q36A'))
-        Q37A= int (request.POST.get ('Q37A'))
-        Q38A= int (request.POST.get ('Q38A'))
-        Q39A= int (request.POST.get ('Q39A'))
-        Q40A= int (request.POST.get ('Q40A'))
-        Q41A= int (request.POST.get ('Q41A'))
-        Q42A= int (request.POST.get ('Q42A'))
+        return render(request, 'health/Questionnaire.html', {'feedback': feedback})
+    
 
-        #Calculate the total score and display it on the page
-        score = 0
-
-        for i in range(1, 42):
-            question_name = 'Q' + str(i) + 'A'
-            answer = int(request.POST.get(question_name))
-            score += answer
-            
-            model = pd.read_pickle("C:\\Users\\muema\\svm_model.pkl")
-
-            result = model.predict([[score]])
-
-            classification = result[0]
-
-            return JsonResponse({'result': classification})
-
-            PredResults.objects.create(classification=classification)
-
-    return render(request, "health/Questionnaire.html")
-   
-
+    return render(request, 'health/Questionnaire.html')
 
 def signup(request):
     
@@ -116,8 +99,7 @@ def signup(request):
         email = request.POST['email']
         password = request.POST['password']
         confirmPassword = request.POST['confirmPassword']
-        phoneNumber = request.POST['phoneNumber']
-        gender = request.POST['gender']
+        
 
         if User.objects.filter(username=username):
             messages.error(request,"Username already exists")

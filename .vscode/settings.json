@@ -1,10 +1,14 @@
 {
     "cSpell.words": [
         "csrfmiddlewaretoken",
+        "denoise",
         "jazzmin",
         "myuser",
         "signin",
         "signout",
-        "uidb"
+        "stopwords",
+        "transformative",
+        "uidb",
+        "vectorizer"
     ]
 }
